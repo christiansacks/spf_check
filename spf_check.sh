@@ -27,6 +27,6 @@ GRN="[1;32m";YEL="[1;33m";RED="[1;31m";NOCOL="[0m";
 case $mDEPTH in
   [1-7])	SCOL="${GRN}";;
   [8-9])	SCOL="${YEL}";;
-  *)	SCOL="${RED}";;
+  *)		SCOL="${RED}";;
 esac
 echo "${SCOL}Total: $COUNT (Max lookups: $mDEPTH)${NOCOL}"
