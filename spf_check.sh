@@ -7,10 +7,7 @@ usage() {
 case $2 in
   [yY][eE][sS]|[tT][rR][uU][eE]|1) DEBUG=true;;
 esac
-COUNT=0
-DEPTH=0
-mDEPTH=0
-INDENT=2
+COUNT=0;DEPTH=0;mDEPTH=0;INDENT=2;
 checkIncludes() {
   SPF=$1
   for I in $(dig -t txt $SPF +short|grep -oE "include:.* |ip[4,6]:.* "|sed 's/include://g; s/ip[4,6]://g; s/\"//g'|tr ' ' '\n'); do
@@ -26,4 +23,10 @@ checkIncludes() {
 }
 checkIncludes $DOMAIN
 [[ $DEBUG ]] && echo
-echo "Total: $COUNT (Max lookups: $mDEPTH)"
+GRN="[1;32m";YEL="[1;33m";RED="[1;31m";NOCOL="[0m";
+case $mDEPTH in
+  [1-7])	SCOL="${GRN}";;
+  [8-9])	SCOL="${YEL}";;
+  *)	SCOL="${RED}";;
+esac
+echo "${SCOL}Total: $COUNT (Max lookups: $mDEPTH)${NOCOL}"
